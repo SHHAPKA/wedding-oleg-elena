@@ -11,13 +11,13 @@ export function LoginForm() {
   const [state, formAction, isPending] = useActionState(loginAdmin, initialState);
 
   return (
-    <form action={formAction}>
-      <div>
+    <form className="admin-login-form" action={formAction}>
+      <div className="admin-form-field">
         <label htmlFor="email">Email</label>
         <input id="email" name="email" type="email" autoComplete="email" required />
       </div>
 
-      <div>
+      <div className="admin-form-field">
         <label htmlFor="password">Пароль</label>
         <input
           id="password"
@@ -28,11 +28,11 @@ export function LoginForm() {
         />
       </div>
 
-      <button type="submit" disabled={isPending}>
+      <button className="admin-primary-button" type="submit" disabled={isPending}>
         {isPending ? "Входим..." : "Войти"}
       </button>
 
-      {state.error ? <p>{state.error}</p> : null}
+      {state.error ? <p className="admin-action-error">{state.error}</p> : null}
     </form>
   );
 }

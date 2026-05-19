@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fcff;
+  --background: #ffffff;
   --foreground: #162a3a;
-  --ink: #153f68;
+  --ink: #00376B;
   --muted: #5f788c;
   --line: #91b1c8;
   --water: #d9edf7;
@@ -13,8 +13,6 @@
   --paper: #ffffff;
   --error: #9d3942;
   --success: #2d6f57;
-  --font-serif: var(--font-old-standard);
-  --font-script: var(--font-princess-diana);
 }
 
 * {
@@ -27,11 +25,10 @@ html {
 
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(221, 240, 249, 0.56), transparent 340px),
-    var(--background);
+  overflow-x: hidden;
+  background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-serif), Georgia, serif;
+  font-family: var(--font-old-standard), Georgia, serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -47,85 +44,123 @@ button {
 }
 
 .font-script {
-  font-family: "Monotype Corsiva", "Segoe Script", var(--font-script), var(--font-serif), cursive;
+  font-family: var(--font-princess-diana), "Princess Diana", "Monotype Corsiva", "Segoe Script", cursive;
 }
 
 .wedding-page {
   position: relative;
   width: min(calc(100% - 40px), 420px);
   margin: 20px auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .invite-section {
   position: relative;
-  padding: 30px 0;
   text-align: center;
 }
 
 .invite-section p {
   margin: 0 auto;
-  max-width: 330px;
+  max-width: 240px;
   color: var(--foreground);
-  font-size: 15px;
-  line-height: 1.45;
+  font-size: 10px;
+  line-height: 1.2;
 }
 
 .invite-section p + p {
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .hero-section {
-  min-height: 430px;
-  padding-top: 34px;
+  min-height: 270px;
+  padding: 40px 0 35px;
 }
 
-.hero-date {
-  position: relative;
-  z-index: 1;
-  color: var(--ink);
-  font-size: 11px;
-  letter-spacing: 0;
-  text-transform: uppercase;
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 48.5%;
+  width: 410px;
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  transform: translateX(-50%);
+  user-select: none;
 }
 
-.hero-title {
+.hero-content {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 2px;
-  margin: 14px auto 8px;
-  color: #111b23;
-  font-size: clamp(58px, 18vw, 84px);
-  font-style: italic;
+  justify-items: center;
+}
+
+.hero-heart {
+  width: 13px;
+  height: 13px;
+  margin-bottom: 12px;
+}
+
+.hero-kicker {
+  color: var(--ink);
+  font-family: var(--font-old-standard), Georgia, serif;
+  font-size: 10px;
+  font-style: normal;
   font-weight: 400;
-  line-height: 0.82;
+  line-height: 1.2;
+}
+
+.hero-title {
+  display: grid;
+  gap: 4px;
+  margin: 4px auto 20px auto;
+  font-family: var(--font-princess-diana), "Princess Diana", "Monotype Corsiva", "Segoe Script", cursive;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3;
 }
 
 .hero-title__amp {
-  margin: -4px 0 -8px;
-  color: var(--ink);
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 28px;
-  font-style: italic;
+  font-family: var(--font-old-standard), Georgia, serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.hero-title__amp::before,
+.hero-title__amp::after {
+  display: block;
+  width: 20px;
+  height: 0.5px;
+  background: black;
+  content: "";
 }
 
 .date-line {
-  position: relative;
-  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--ink);
-  font-size: 13px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 1.21;
 }
 
-.date-line i {
+.date-line strong {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.date-line__divider {
   display: block;
-  width: 22px;
-  height: 1px;
-  background: var(--line);
+  width: 0.5px;
+  height: 20px;
+  background: black;
 }
 
 .watercolor {
@@ -164,9 +199,65 @@ button {
   transform: rotate(-10deg);
 }
 
-.lead {
-  color: #172431;
-  font-size: 18px;
+.invitation-section {
+  --invitation-bg-width: 392px;
+  --invitation-bg-left: 48.5%;
+  --invitation-bg-top: 100px;
+  --invitation-bg-shift-x: -50%;
+  padding: 22px 0 80px;
+  overflow: visible;
+}
+
+.invitation-background {
+  position: absolute;
+  top: var(--invitation-bg-top);
+  left: var(--invitation-bg-left);
+  z-index: 0;
+  width: var(--invitation-bg-width);
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  transform: translateX(var(--invitation-bg-shift-x));
+  user-select: none;
+}
+
+.invitation-section p.invitation-lead {
+  max-width: 240px;
+  margin-bottom: 50px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.invitation-shell {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: auto;
+  margin: 0 auto 8px;
+}
+
+.invitation-section .section-title {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 14px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.invitation-section p {
+  position: relative;
+  z-index: 1;
+  max-width: 356px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.invitation-section .invitation-place {
+  display: grid;
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: 12px;
+  font-style: italic;
   line-height: 1.25;
 }
 
@@ -184,7 +275,7 @@ button {
 .section-title {
   margin: 0 auto 12px;
   color: var(--ink);
-  font-size: 20px;
+  font-size: 16px;
   font-style: italic;
   font-weight: 400;
   line-height: 1.15;
@@ -195,31 +286,209 @@ button {
 }
 
 .couple-photo-section {
-  padding-top: 16px;
-  padding-bottom: 42px;
+  padding-bottom: 40px;
 }
 
-.photo-arch {
-  width: min(100%, 360px);
-  aspect-ratio: 0.82;
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 50% 50% 0 0 / 42% 42% 0 0;
-  background: #d6dce0;
-}
-
-.photo-placeholder {
-  display: grid;
+.couple-photo {
+  display: block;
   width: 100%;
-  height: 100%;
-  place-items: center;
-  background:
-    linear-gradient(146deg, rgba(21, 32, 42, 0.16), transparent 32%),
-    repeating-linear-gradient(168deg, rgba(39, 48, 56, 0.2) 0 1px, transparent 1px 18px),
-    linear-gradient(180deg, #c7ced2, #87939b);
-  color: rgba(255, 255, 255, 0.72);
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.wishes-section {
+  position: relative;
+  min-height: 1005px;
+  padding: 0 0 24px;
+  overflow: visible;
+}
+
+.wishes-background {
+  position: absolute;
+  top: 104px;
+  left: 50%;
+  z-index: 0;
+  width: 420px;
+  max-width: none;
+  height: auto;
+  opacity: 0.82;
+  pointer-events: none;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+.wishes-content {
+  position: relative;
+  z-index: 1;
+}
+
+.wishes-section p {
+  max-width: 276px;
+  font-size: 10.5px;
+  line-height: 1.18;
+}
+
+.wishes-section p + p {
+  margin-top: 13px;
+}
+
+.wishes-section .wishes-kicker {
+  max-width: 230px;
+  color: var(--foreground);
   font-size: 13px;
-  text-transform: uppercase;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.wishes-people {
+  position: relative;
+  width: 238px;
+  height: 202px;
+  margin: 26px auto 8px;
+}
+
+.wishes-frame,
+.wishes-body {
+  position: absolute;
+  display: block;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.wishes-frame {
+  z-index: 1;
+  object-fit: contain;
+}
+
+.wishes-frame--left {
+  top: 6px;
+  left: 33px;
+  width: 78px;
+}
+
+.wishes-frame--right {
+  top: 13px;
+  left: 145px;
+  width: 78px;
+}
+
+.wishes-body {
+  inset: 0;
+  z-index: 2;
+  width: 238px;
+}
+
+.wishes-title-row {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 2px auto 10px;
+}
+
+.wishes-section .wishes-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.18;
+}
+
+.wishes-seastar {
+  position: absolute;
+  top: -6px;
+  right: -30px;
+  width: 28px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.wishes-section .wishes-gift-lead {
+  max-width: 270px;
+}
+
+.wishes-divider {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 7px;
+  margin: 28px 0 36px;
+}
+
+.wishes-divider span {
+  height: 1px;
+  background: var(--line);
+}
+
+.wishes-divider-heart {
+  width: 13px;
+  height: auto;
+}
+
+.wishes-text-block {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+.wishes-text-block h3 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.wishes-text-block p {
+  margin: 0;
+  text-align: left;
+  text-shadow: 0 0 7px #ffffff, 0 0 7px #ffffff;
+}
+
+.wishes-note-block {
+  margin-top: 0;
+}
+
+.wishes-note-block p {
+  max-width: 286px;
+}
+
+.wishes-surprises-block {
+  margin-top: 47px;
+  padding-left: 58px;
+}
+
+.wishes-surprises-block p {
+  max-width: 230px;
+}
+
+.wishes-dress-block {
+  margin-top: 31px;
+  padding-left: 106px;
+}
+
+.wishes-dress-block p {
+  max-width: 250px;
+}
+
+.wishes-finale {
+  margin-top: 78px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.wishes-finale p {
+  max-width: 290px;
+  color: var(--ink);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.14;
+}
+
+.wishes-finale p + p {
+  margin-top: 2px;
 }
 
 .small-note {
@@ -596,9 +865,509 @@ button {
   height: 38px;
 }
 
+.admin-login-page,
+.admin-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.admin-login-page {
+  display: grid;
+  place-items: center;
+}
+
+.admin-login-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 390px);
+  padding: 34px 30px 30px;
+  border: 1px solid rgba(145, 177, 200, 0.52);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 70px rgba(21, 63, 104, 0.12);
+  text-align: center;
+}
+
+.admin-login-card .shell-mark {
+  margin-top: 0;
+}
+
+.admin-login-card p,
+.admin-page-header p,
+.admin-page-header span {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.admin-login-card h1,
+.admin-page-header h1 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.admin-login-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 26px;
+  text-align: left;
+}
+
+.admin-form-field,
+.admin-edit-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.admin-form-field label,
+.admin-edit-form label span,
+.admin-search span,
+.admin-checkbox span {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.admin-form-field input,
+.admin-edit-form input,
+.admin-edit-form select,
+.admin-edit-form textarea,
+.admin-search input {
+  width: 100%;
+  border: 1px solid rgba(145, 177, 200, 0.72);
+  border-radius: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--foreground);
+  font-size: 15px;
+  line-height: 1.35;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.admin-form-field input,
+.admin-edit-form input,
+.admin-edit-form select,
+.admin-search input {
+  height: 40px;
+  padding: 0 12px;
+}
+
+.admin-edit-form textarea {
+  min-height: 86px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.admin-form-field input:focus,
+.admin-edit-form input:focus,
+.admin-edit-form select:focus,
+.admin-edit-form textarea:focus,
+.admin-search input:focus {
+  border-color: var(--ink);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(126, 169, 194, 0.22);
+}
+
+.admin-primary-button,
+.admin-secondary-button,
+.admin-filters button,
+.admin-row-actions button,
+.admin-modal header button,
+.admin-modal-actions button {
+  min-height: 36px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.admin-primary-button {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.admin-primary-button:hover:not(:disabled) {
+  background: #0f3457;
+  transform: translateY(-1px);
+}
+
+.admin-primary-button:disabled,
+.admin-danger-button:disabled {
+  cursor: default;
+  opacity: 0.66;
+}
+
+.admin-secondary-button,
+.admin-row-actions button,
+.admin-modal header button,
+.admin-modal-actions button,
+.admin-filters button {
+  border: 1px solid rgba(145, 177, 200, 0.72);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink);
+}
+
+.admin-secondary-button,
+.admin-modal-actions button {
+  padding: 0 16px;
+}
+
+.admin-secondary-button:hover,
+.admin-row-actions button:hover,
+.admin-modal header button:hover,
+.admin-modal-actions button:hover,
+.admin-filters button:hover,
+.admin-filters button.is-active {
+  border-color: var(--ink);
+  background: rgba(217, 237, 247, 0.82);
+}
+
+.admin-danger-button {
+  color: var(--error) !important;
+}
+
+.admin-danger-button--solid {
+  border-color: var(--error) !important;
+  background: var(--error) !important;
+  color: #ffffff !important;
+}
+
+.admin-danger-button--solid:hover:not(:disabled) {
+  background: #852e36 !important;
+}
+
+.admin-action-error,
+.admin-load-error {
+  margin: 0;
+  color: var(--error);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.admin-page {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+}
+
+.admin-watercolor {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.54;
+}
+
+.admin-watercolor--left {
+  top: 18px;
+  left: -64px;
+  width: 340px;
+  height: 260px;
+  background:
+    linear-gradient(174deg, transparent 46%, rgba(71, 128, 164, 0.2) 47% 49%, transparent 50%),
+    radial-gradient(ellipse at 42% 44%, rgba(214, 235, 245, 0.9), transparent 58%),
+    radial-gradient(ellipse at 28% 68%, rgba(215, 194, 160, 0.5), transparent 34%);
+}
+
+.admin-watercolor--right {
+  right: -96px;
+  bottom: -80px;
+  width: 360px;
+  height: 330px;
+  background:
+    linear-gradient(72deg, transparent 45%, rgba(66, 102, 125, 0.18) 46% 47%, transparent 48%),
+    radial-gradient(ellipse at 50% 56%, rgba(238, 228, 209, 0.82), transparent 62%),
+    radial-gradient(ellipse at 68% 28%, rgba(217, 237, 247, 0.9), transparent 42%);
+}
+
+.admin-page-header,
+.admin-dashboard {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 26px 0 24px;
+}
+
+.admin-dashboard {
+  display: grid;
+  gap: 20px;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.admin-stats article,
+.admin-table-shell {
+  border: 1px solid rgba(145, 177, 200, 0.52);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 50px rgba(21, 63, 104, 0.08);
+}
+
+.admin-stats article {
+  display: grid;
+  gap: 8px;
+  min-height: 104px;
+  padding: 18px;
+}
+
+.admin-stats span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.admin-stats strong {
+  color: var(--ink);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.admin-toolbar {
+  display: grid;
+  grid-template-columns: minmax(240px, 360px) 1fr;
+  gap: 14px;
+  align-items: end;
+}
+
+.admin-search {
+  display: grid;
+  gap: 7px;
+}
+
+.admin-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.admin-filters button {
+  padding: 0 12px;
+}
+
+.admin-table-shell {
+  overflow: hidden;
+}
+
+.admin-table-scroll {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  min-width: 940px;
+  border-collapse: collapse;
+}
+
+.admin-table caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(145, 177, 200, 0.34);
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.admin-table td {
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.admin-table td strong {
+  color: #0e2537;
+  font-size: 15px;
+}
+
+.admin-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.admin-status--alone,
+.admin-status--with_partner {
+  background: rgba(217, 237, 247, 0.82);
+  color: var(--ink);
+}
+
+.admin-status--declined {
+  background: rgba(157, 57, 66, 0.1);
+  color: var(--error);
+}
+
+.admin-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.admin-row-actions button {
+  padding: 0 10px;
+}
+
+.admin-empty-cell {
+  padding: 34px 16px !important;
+  color: var(--muted) !important;
+  text-align: center !important;
+}
+
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(22, 42, 58, 0.28);
+  backdrop-filter: blur(4px);
+}
+
+.admin-modal {
+  width: min(100%, 560px);
+  max-height: calc(100vh - 44px);
+  overflow-y: auto;
+  border: 1px solid rgba(145, 177, 200, 0.68);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(217, 237, 247, 0.72), transparent 220px),
+    #ffffff;
+  box-shadow: 0 28px 90px rgba(12, 36, 56, 0.22);
+}
+
+.admin-modal--compact {
+  width: min(100%, 440px);
+}
+
+.admin-modal header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 22px 0;
+}
+
+.admin-modal h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.admin-modal header button {
+  padding: 0 12px;
+}
+
+.admin-modal p {
+  margin: 18px 22px 0;
+  color: var(--foreground);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.admin-edit-form,
+.admin-modal--compact form {
+  display: grid;
+  gap: 16px;
+  padding: 22px;
+}
+
+.admin-checkbox {
+  display: flex !important;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 9px;
+}
+
+.admin-checkbox input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--ink);
+}
+
+.admin-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 @media (max-width: 360px) {
   .wedding-page {
     width: calc(100% - 40px);
+  }
+
+  .wishes-section {
+    min-height: 980px;
+  }
+
+  .wishes-background {
+    top: 104px;
+    width: 420px;
+  }
+
+  .wishes-people {
+    width: 224px;
+    height: 190px;
+  }
+
+  .wishes-frame--left {
+    left: 33px;
+    width: 72px;
+  }
+
+  .wishes-frame--right {
+    left: 124px;
+    width: 70px;
+  }
+
+  .wishes-body {
+    width: 224px;
+  }
+
+  .wishes-surprises-block {
+    padding-left: 58px;
+  }
+
+  .wishes-dress-block {
+    padding-left: 86px;
   }
 
   .invite-section p,
@@ -618,5 +1387,55 @@ button {
   .timeline li {
     grid-template-columns: 46px 1fr;
     gap: 12px;
+  }
+}
+
+@media (max-width: 780px) {
+  .admin-login-page,
+  .admin-page {
+    padding: 18px;
+  }
+
+  .admin-page-header,
+  .admin-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-page-header {
+    display: grid;
+  }
+
+  .admin-page-header form,
+  .admin-secondary-button {
+    width: 100%;
+  }
+
+  .admin-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-filters {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-login-card,
+  .admin-stats article,
+  .admin-table-shell,
+  .admin-modal {
+    border-radius: 8px;
+  }
+
+  .admin-login-card {
+    padding: 28px 22px 24px;
+  }
+
+  .admin-modal-actions {
+    display: grid;
   }
 }

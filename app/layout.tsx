@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 };
 
 const oldStandard = localFont({
+  display: "block",
   src: [
     {
       path: "../public/fonts/OldStandard-Regular.ttf",
@@ -30,6 +31,7 @@ const oldStandard = localFont({
 
 const princessDiana = localFont({
   src: "../public/fonts/Princess-Diana.ttf",
+  display: "block",
   variable: "--font-princess-diana",
 });
 

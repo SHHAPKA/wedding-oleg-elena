@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm, useWatch, type SubmitHandler } from "react-hook-form";
 import { submitRsvp } from "@/app/actions/submit-rsvp";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { rsvpSchema, type RSVPFormSchemaInput } from "@/lib/validations/rsvp";
 import type { RSVPFormValues, SubmitRsvpResult } from "@/types/rsvp";
 
@@ -47,48 +48,58 @@ export function RSVPForm() {
   };
 
   return (
-    <form className="rsvp-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="field">
+    <ScrollReveal as="form" className="rsvp-form" onSubmit={handleSubmit(onSubmit)} delay={0.26}>
+      <ScrollReveal className="field" delay={0.32} y={10}>
         <label htmlFor="guestName">Ваше имя и фамилия</label>
         <input id="guestName" type="text" autoComplete="name" {...register("guestName")} />
-        {errors.guestName ? <p className="field-error">{errors.guestName.message}</p> : null}
-      </div>
+        {errors.guestName ? (
+          <ScrollReveal as="p" className="field-error" y={6}>
+            {errors.guestName.message}
+          </ScrollReveal>
+        ) : null}
+      </ScrollReveal>
 
-      <fieldset className="field option-group">
+      <ScrollReveal as="fieldset" className="field option-group" delay={0.38} y={10}>
         <legend>Вы сможете быть с нами?</legend>
-        <label>
+        <ScrollReveal as="label" delay={0.44} y={8}>
           <input type="radio" value="alone" {...register("attendanceStatus")} />
           <span>Да, приду один / одна</span>
-        </label>
-        <label>
+        </ScrollReveal>
+        <ScrollReveal as="label" delay={0.5} y={8}>
           <input type="radio" value="with_partner" {...register("attendanceStatus")} />
           <span>Да, буду с парой</span>
-        </label>
-        <label>
+        </ScrollReveal>
+        <ScrollReveal as="label" delay={0.56} y={8}>
           <input type="radio" value="declined" {...register("attendanceStatus")} />
           <span>К сожалению, не смогу</span>
-        </label>
+        </ScrollReveal>
         {errors.attendanceStatus ? (
-          <p className="field-error">{errors.attendanceStatus.message}</p>
+          <ScrollReveal as="p" className="field-error" y={6}>
+            {errors.attendanceStatus.message}
+          </ScrollReveal>
         ) : null}
-      </fieldset>
+      </ScrollReveal>
 
       {attendanceStatus === "with_partner" ? (
-        <div className="field">
+        <ScrollReveal className="field" y={10}>
           <label htmlFor="partnerName">Имя и фамилия пары</label>
           <input id="partnerName" type="text" {...register("partnerName")} />
-          {errors.partnerName ? <p className="field-error">{errors.partnerName.message}</p> : null}
-        </div>
+          {errors.partnerName ? (
+            <ScrollReveal as="p" className="field-error" y={6}>
+              {errors.partnerName.message}
+            </ScrollReveal>
+          ) : null}
+        </ScrollReveal>
       ) : null}
 
-      <label className="checkbox-field">
+      <ScrollReveal as="label" className="checkbox-field" delay={0.62} y={10}>
         <input type="checkbox" {...register("hasChildren")} />
         <span>Будут дети</span>
-      </label>
+      </ScrollReveal>
 
       {hasChildren ? (
         <>
-          <div className="field">
+          <ScrollReveal className="field" y={10}>
             <label htmlFor="childrenCount">Количество детей</label>
             <input
               id="childrenCount"
@@ -98,35 +109,54 @@ export function RSVPForm() {
               {...register("childrenCount", { valueAsNumber: true })}
             />
             {errors.childrenCount ? (
-              <p className="field-error">{errors.childrenCount.message}</p>
+              <ScrollReveal as="p" className="field-error" y={6}>
+                {errors.childrenCount.message}
+              </ScrollReveal>
             ) : null}
-          </div>
+          </ScrollReveal>
 
-          <div className="field">
+          <ScrollReveal className="field" y={10}>
             <label htmlFor="childrenInfo">Имена и возраст детей</label>
             <textarea id="childrenInfo" rows={3} {...register("childrenInfo")} />
             {errors.childrenInfo ? (
-              <p className="field-error">{errors.childrenInfo.message}</p>
+              <ScrollReveal as="p" className="field-error" y={6}>
+                {errors.childrenInfo.message}
+              </ScrollReveal>
             ) : null}
-          </div>
+          </ScrollReveal>
         </>
       ) : null}
 
-      <div className="field">
+      <ScrollReveal className="field" delay={0.68} y={10}>
         <label htmlFor="comment">Комментарий</label>
         <textarea id="comment" rows={3} {...register("comment")} />
-        {errors.comment ? <p className="field-error">{errors.comment.message}</p> : null}
-      </div>
+        {errors.comment ? (
+          <ScrollReveal as="p" className="field-error" y={6}>
+            {errors.comment.message}
+          </ScrollReveal>
+        ) : null}
+      </ScrollReveal>
 
-      <button className="submit-button" type="submit" disabled={isSubmitting}>
+      <ScrollReveal
+        as="button"
+        className="submit-button"
+        type="submit"
+        disabled={isSubmitting}
+        delay={0.74}
+        y={8}
+      >
         {isSubmitting ? "Отправляем..." : "Отправить"}
-      </button>
+      </ScrollReveal>
 
       {result ? (
-        <p className={result.success ? "form-message form-message--success" : "form-message"}>
+        <ScrollReveal
+          as="p"
+          className={result.success ? "form-message form-message--success" : "form-message"}
+          y={6}
+        >
           {result.success ? result.message : result.error}
-        </p>
+        </ScrollReveal>
       ) : null}
-    </form>
+    </ScrollReveal>
   );
 }

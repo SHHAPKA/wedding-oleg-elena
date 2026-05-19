@@ -15,7 +15,7 @@ alter table rsvp_responses enable row level security;
 
 revoke all on table rsvp_responses from anon, authenticated;
 grant insert on table rsvp_responses to anon, authenticated;
-grant select on table rsvp_responses to authenticated;
+grant select, update, delete on table rsvp_responses to authenticated;
 
 drop policy if exists "Anyone can submit RSVP responses" on rsvp_responses;
 create policy "Anyone can submit RSVP responses"
@@ -28,5 +28,20 @@ drop policy if exists "Authenticated users can view RSVP responses" on rsvp_resp
 create policy "Authenticated users can view RSVP responses"
   on rsvp_responses
   for select
+  to authenticated
+  using (true);
+
+drop policy if exists "Authenticated users can update RSVP responses" on rsvp_responses;
+create policy "Authenticated users can update RSVP responses"
+  on rsvp_responses
+  for update
+  to authenticated
+  using (true)
+  with check (true);
+
+drop policy if exists "Authenticated users can delete RSVP responses" on rsvp_responses;
+create policy "Authenticated users can delete RSVP responses"
+  on rsvp_responses
+  for delete
   to authenticated
   using (true);
