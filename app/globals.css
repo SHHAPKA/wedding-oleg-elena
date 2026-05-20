@@ -5,7 +5,7 @@
   --foreground: #162a3a;
   --ink: #00376B;
   --muted: #5f788c;
-  --line: #91b1c8;
+  --line: #00376B;
   --water: #d9edf7;
   --water-deep: #7ea9c2;
   --sand: #d7c2a0;
@@ -324,13 +324,13 @@ button {
 }
 
 .wishes-section p {
-  max-width: 276px;
-  font-size: 10.5px;
-  line-height: 1.18;
+  max-width: 340px;
+  font-size: 12px;
+  line-height: 1.25;
 }
 
 .wishes-section p + p {
-  margin-top: 13px;
+  margin-top: 15px;
 }
 
 .wishes-section .wishes-kicker {
@@ -343,9 +343,9 @@ button {
 
 .wishes-people {
   position: relative;
-  width: 238px;
-  height: 202px;
-  margin: 26px auto 8px;
+  width: 219px;
+  height: 185px;
+  margin: 32px auto 32px;
 }
 
 .wishes-frame,
@@ -363,15 +363,15 @@ button {
 }
 
 .wishes-frame--left {
-  top: 6px;
-  left: 33px;
-  width: 78px;
+  top: 5.6px;
+  left: 31.9px;
+  width: 71.5px;
 }
 
 .wishes-frame--right {
-  top: 13px;
-  left: 145px;
-  width: 78px;
+  top: 12.8px;
+  left: 134px;
+  width: 70px;
 }
 
 .wishes-body {
@@ -385,13 +385,13 @@ button {
   display: inline-flex;
   align-items: flex-start;
   justify-content: center;
-  margin: 2px auto 10px;
+  margin: 0 auto 10px;
 }
 
 .wishes-section .wishes-title {
   margin: 0;
-  font-size: 20px;
-  line-height: 1.18;
+  font-size: 16px;
+  line-height: 1.25;
 }
 
 .wishes-seastar {
@@ -405,15 +405,15 @@ button {
 }
 
 .wishes-section .wishes-gift-lead {
-  max-width: 270px;
+  max-width: 340px;
 }
 
 .wishes-divider {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 7px;
-  margin: 28px 0 36px;
+  gap: 8px;
+  margin: 35px 0 60px;
 }
 
 .wishes-divider span {
@@ -1439,3 +1439,4 @@ button {
     display: grid;
   }
 }
+
