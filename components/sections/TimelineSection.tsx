@@ -24,6 +24,7 @@ const events = [
   { time: "20:00", title: "Торт" },
   {
     time: "21:00",
+    noteClassName: "timeline-note--day-end",
     title: "Окончание праздничного дня",
     details: "Терраса ресторана",
     note: "Даже такой день может когда-то подойти к концу",
@@ -84,7 +85,12 @@ export function TimelineSection() {
                   </ScrollReveal>
                 ) : null}
                 {event.note ? (
-                  <ScrollReveal as="p" className="timeline-note" delay={0.3 + index * 0.08} y={6}>
+                  <ScrollReveal
+                    as="p"
+                    className={["timeline-note", event.noteClassName].filter(Boolean).join(" ")}
+                    delay={0.3 + index * 0.08}
+                    y={6}
+                  >
                     {event.note}
                   </ScrollReveal>
                 ) : null}

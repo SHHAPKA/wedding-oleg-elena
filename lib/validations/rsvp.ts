@@ -39,11 +39,28 @@ export const rsvpSchema = z
       });
     }
 
-    if (data.hasChildren && (!data.childrenCount || data.childrenCount < 1)) {
+    const shouldValidateChildren = data.attendanceStatus !== "declined" && data.hasChildren;
+
+    if (shouldValidateChildren && (!data.childrenCount || data.childrenCount < 1)) {
       ctx.addIssue({
         code: "custom",
         path: ["childrenCount"],
         message: "Укажите количество детей",
+      });
+    }
+
+    const filledChildrenRows = data.childrenInfo
+      ? data.childrenInfo.split(",").map((child) => child.trim()).filter(Boolean)
+      : [];
+
+    if (
+      shouldValidateChildren &&
+      (!data.childrenInfo || filledChildrenRows.length < (data.childrenCount ?? 0))
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["childrenInfo"],
+        message: "Укажите имя и возраст каждого ребенка",
       });
     }
   });
