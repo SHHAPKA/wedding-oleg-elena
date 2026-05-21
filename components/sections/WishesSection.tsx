@@ -79,7 +79,7 @@ export function WishesSection() {
           <span />
           <RevealImage
             className="wishes-divider-heart"
-            src="/images/heart-ico.svg"
+            src="/images/heart-ico.svg-blue.svg"
             alt=""
             width={26}
             height={26}
@@ -93,14 +93,14 @@ export function WishesSection() {
         <ScrollReveal className="wishes-text-block wishes-note-block" delay={0.6}>
           <h3>Примечание</h3>
           <p>
-            Будем благодарны, если вы воздержитесь от криков &quot;Горько&quot; на празднике, ведь поцелуй - это знак выражения чувств, он не может быть по заказу.
+            Будем благодарны, если вы воздержитесь от криков &quot;Горько&quot; на празднике, ведь поцелуй — это знак выражения чувств, он не может быть по заказу.
           </p>
         </ScrollReveal>
 
         <ScrollReveal className="wishes-text-block wishes-surprises-block" delay={0.66}>
           <h3>Сюрпризы</h3>
           <p>
-            Если у Вас возникло желание подготовить поздравление для нас, свяжитесь пожалуйста с нашим координатором торжества - Владиславом <strong>(Tg: @VladShtefan)</strong>
+            Если у Вас возникло желание подготовить поздравление для нас, свяжитесь пожалуйста с нашим координатором торжества - Владиславом<br/><strong>(Tg: @VladShtefan)</strong>
           </p>
         </ScrollReveal>
 
