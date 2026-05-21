@@ -33,15 +33,8 @@ export default async function AdminResponsesPage() {
 
   return (
     <main className="admin-page">
-      <div className="admin-watercolor admin-watercolor--left" aria-hidden="true" />
-      <div className="admin-watercolor admin-watercolor--right" aria-hidden="true" />
-
       <header className="admin-page-header">
-        <div>
-          <p>23 августа 2026</p>
-          <h1>Ответы RSVP</h1>
-          <span>Олег и Елена</span>
-        </div>
+        <h1>Ответы</h1>
         <form action={signOut}>
           <button className="admin-secondary-button" type="submit">
             Выйти

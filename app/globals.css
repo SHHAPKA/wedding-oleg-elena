@@ -1102,7 +1102,6 @@ button {
   position: relative;
   min-height: 100vh;
   padding: 28px;
-  overflow: hidden;
 }
 
 .admin-login-page {
@@ -1122,22 +1121,9 @@ button {
   text-align: center;
 }
 
-.admin-login-card .shell-mark {
-  margin-top: 0;
-}
-
-.admin-login-card p,
-.admin-page-header p,
-.admin-page-header span {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.35;
-}
-
 .admin-login-card h1,
 .admin-page-header h1 {
-  margin: 8px 0 0;
+  margin: 0;
   color: var(--ink);
   font-size: 30px;
   font-style: italic;
@@ -1285,37 +1271,8 @@ button {
 }
 
 .admin-page {
-  width: min(100%, 1180px);
+  width: min(100%, 1480px);
   margin: 0 auto;
-}
-
-.admin-watercolor {
-  position: fixed;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.54;
-}
-
-.admin-watercolor--left {
-  top: 18px;
-  left: -64px;
-  width: 340px;
-  height: 260px;
-  background:
-    linear-gradient(174deg, transparent 46%, rgba(71, 128, 164, 0.2) 47% 49%, transparent 50%),
-    radial-gradient(ellipse at 42% 44%, rgba(214, 235, 245, 0.9), transparent 58%),
-    radial-gradient(ellipse at 28% 68%, rgba(215, 194, 160, 0.5), transparent 34%);
-}
-
-.admin-watercolor--right {
-  right: -96px;
-  bottom: -80px;
-  width: 360px;
-  height: 330px;
-  background:
-    linear-gradient(72deg, transparent 45%, rgba(66, 102, 125, 0.18) 46% 47%, transparent 48%),
-    radial-gradient(ellipse at 50% 56%, rgba(238, 228, 209, 0.82), transparent 62%),
-    radial-gradient(ellipse at 68% 28%, rgba(217, 237, 247, 0.9), transparent 42%);
 }
 
 .admin-page-header,
@@ -1404,7 +1361,7 @@ button {
 
 .admin-table {
   width: 100%;
-  min-width: 940px;
+  min-width: 880px;
   border-collapse: collapse;
 }
 

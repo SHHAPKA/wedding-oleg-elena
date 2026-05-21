@@ -35,7 +35,6 @@ function readRsvpValues(formData: FormData) {
     hasChildren: formData.get("hasChildren") === "on",
     childrenCount: readString(formData, "childrenCount"),
     childrenInfo: readString(formData, "childrenInfo"),
-    comment: readString(formData, "comment"),
   };
 }
 
@@ -76,7 +75,6 @@ export async function updateRsvpResponse(
         data.attendanceStatus !== "declined" && data.hasChildren
           ? normalizeOptionalText(data.childrenInfo)
           : null,
-      comment: normalizeOptionalText(data.comment),
       total_guests: totals.totalGuests,
     })
     .eq("id", id);

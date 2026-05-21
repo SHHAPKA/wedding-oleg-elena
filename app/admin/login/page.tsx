@@ -4,8 +4,6 @@ export default function AdminLoginPage() {
   return (
     <main className="admin-login-page">
       <section className="admin-login-card" aria-labelledby="admin-login-title">
-        <div className="shell-mark" aria-hidden="true" />
-        <p>Олег и Елена</p>
         <h1 id="admin-login-title">Вход в админку</h1>
         <LoginForm />
       </section>

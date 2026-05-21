@@ -85,7 +85,6 @@ function matchesSearch(response: RSVPResponseRow, query: string) {
     response.guest_name,
     response.partner_name,
     response.children_info,
-    response.comment,
     statusLabels[response.attendance_status],
   ]
     .filter(Boolean)
@@ -198,7 +197,7 @@ export function ResponsesDashboard({ responses }: ResponsesDashboardProps) {
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Имя, пара, дети, комментарий"
+            placeholder="Имя, пара, дети"
           />
         </label>
 
@@ -227,7 +226,6 @@ export function ResponsesDashboard({ responses }: ResponsesDashboardProps) {
                 <th>Пара</th>
                 <th>Дети</th>
                 <th>Всего</th>
-                <th>Комментарий</th>
                 <th>Дата</th>
                 <th>Действия</th>
               </tr>
@@ -251,7 +249,6 @@ export function ResponsesDashboard({ responses }: ResponsesDashboardProps) {
                         : "-"}
                     </td>
                     <td>{getAdultsCount(response) + getChildrenCount(response)}</td>
-                    <td>{response.comment ?? "-"}</td>
                     <td>{formatDate(response.created_at)}</td>
                     <td>
                       <div className="admin-row-actions">
@@ -271,7 +268,7 @@ export function ResponsesDashboard({ responses }: ResponsesDashboardProps) {
                 ))
               ) : (
                 <tr>
-                  <td className="admin-empty-cell" colSpan={8}>
+                  <td className="admin-empty-cell" colSpan={7}>
                     {responses.length === 0
                       ? "Ответов пока нет."
                       : "По выбранным фильтрам ничего не найдено."}
@@ -358,11 +355,6 @@ export function ResponsesDashboard({ responses }: ResponsesDashboardProps) {
                   </label>
                 </>
               ) : null}
-
-              <label>
-                <span>Комментарий</span>
-                <textarea name="comment" rows={3} defaultValue={editing.comment ?? ""} />
-              </label>
 
               {actionState.error ? <p className="admin-action-error">{actionState.error}</p> : null}
 

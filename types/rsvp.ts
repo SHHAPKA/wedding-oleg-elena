@@ -13,7 +13,6 @@ export type RSVPFormValues = {
   hasChildren: boolean;
   childrenCount?: number;
   childrenInfo?: string;
-  comment?: string;
 };
 
 export type RSVPGuestTotals = {
@@ -40,7 +39,6 @@ export type RSVPResponseRow = {
   has_children: boolean | null;
   children_count: number | null;
   children_info: string | null;
-  comment: string | null;
   total_guests: number | null;
   created_at: string | null;
 };

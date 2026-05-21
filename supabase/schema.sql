@@ -6,10 +6,11 @@ create table if not exists rsvp_responses (
   has_children boolean default false,
   children_count integer default 0,
   children_info text,
-  comment text,
   total_guests integer default 0,
   created_at timestamp with time zone default now()
 );
+
+alter table rsvp_responses drop column if exists comment;
 
 alter table rsvp_responses enable row level security;
 

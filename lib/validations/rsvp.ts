@@ -28,7 +28,6 @@ export const rsvpSchema = z
     hasChildren: z.boolean().default(false),
     childrenCount: optionalNumber,
     childrenInfo: optionalText,
-    comment: optionalText,
   })
   .superRefine((data, ctx) => {
     if (data.attendanceStatus === "with_partner" && !data.partnerName) {

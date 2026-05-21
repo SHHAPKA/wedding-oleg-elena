@@ -30,7 +30,6 @@ export async function submitRsvp(values: RSVPFormValues): Promise<SubmitRsvpResu
         data.attendanceStatus !== "declined" && data.hasChildren
           ? normalizeOptionalText(data.childrenInfo)
           : null,
-      comment: normalizeOptionalText(data.comment),
       total_guests: totals.totalGuests,
     });
 

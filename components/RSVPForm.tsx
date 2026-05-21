@@ -77,7 +77,6 @@ export function RSVPForm() {
       childrenInfo: shouldSaveChildren
         ? normalizeChildrenInfo(childrenRows.slice(0, visibleChildrenCount))
         : undefined,
-      comment: undefined,
     });
     setResult(response);
 
@@ -235,16 +234,9 @@ export function RSVPForm() {
         </>
       ) : null}
 
-      <ScrollReveal
-        as="button"
-        className="submit-button"
-        type="submit"
-        disabled={isSubmitting}
-        delay={0.86}
-        y={8}
-      >
+      <button className="submit-button" type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Отправляем..." : "Отправить"}
-      </ScrollReveal>
+      </button>
 
       {result ? (
         <ScrollReveal
