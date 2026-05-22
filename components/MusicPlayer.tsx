@@ -6,30 +6,8 @@ const MUSIC_SRC = "/audio/Ed_Sheeran_Perfect.mp3";
 
 export function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const manuallyPausedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const ensureMusicSource = useCallback(async () => {
-    const audio = audioRef.current;
-
-    if (!audio) {
-      return false;
-    }
-
-    if (audio.getAttribute("src") === MUSIC_SRC) {
-      return true;
-    }
-
-    const response = await fetch(MUSIC_SRC, { method: "HEAD" });
-
-    if (!response.ok) {
-      return false;
-    }
-
-    audio.src = MUSIC_SRC;
-    audio.load();
-
-    return true;
-  }, []);
 
   const startMusic = useCallback(async () => {
     const audio = audioRef.current;
@@ -39,12 +17,6 @@ export function MusicPlayer() {
     }
 
     try {
-      const hasMusicSource = await ensureMusicSource();
-
-      if (!hasMusicSource) {
-        return false;
-      }
-
       audio.volume = 0.45;
       await audio.play();
       setIsPlaying(true);
@@ -53,7 +25,7 @@ export function MusicPlayer() {
       setIsPlaying(false);
       return false;
     }
-  }, [ensureMusicSource]);
+  }, []);
 
   const stopMusic = useCallback(() => {
     const audio = audioRef.current;
@@ -68,31 +40,34 @@ export function MusicPlayer() {
 
   useEffect(() => {
     const controller = new AbortController();
+    const startAfterInteraction = (event: Event) => {
+      if (
+        manuallyPausedRef.current ||
+        (event.target instanceof Element && event.target.closest(".music-toggle"))
+      ) {
+        return;
+      }
+
+      void startMusic();
+    };
+
+    window.addEventListener("pointerdown", startAfterInteraction, {
+      signal: controller.signal,
+    });
+    window.addEventListener("keydown", startAfterInteraction, {
+      signal: controller.signal,
+    });
+    window.addEventListener("touchstart", startAfterInteraction, {
+      passive: true,
+      signal: controller.signal,
+    });
+    window.addEventListener("touchend", startAfterInteraction, {
+      passive: true,
+      signal: controller.signal,
+    });
+
     const autoplayTimer = window.setTimeout(() => {
-      startMusic().then((started) => {
-        if (started || controller.signal.aborted) {
-          return;
-        }
-
-        const startAfterInteraction = (event: Event) => {
-          if (event.target instanceof Element && event.target.closest(".music-toggle")) {
-            return;
-          }
-
-          void startMusic();
-        };
-
-        window.addEventListener("pointerdown", startAfterInteraction, {
-          signal: controller.signal,
-        });
-        window.addEventListener("keydown", startAfterInteraction, {
-          once: true,
-          signal: controller.signal,
-        });
-        window.addEventListener("touchstart", startAfterInteraction, {
-          signal: controller.signal,
-        });
-      });
+      void startMusic();
     }, 0);
 
     return () => {
@@ -106,16 +81,18 @@ export function MusicPlayer() {
     const audio = audioRef.current;
 
     if (!audio || !audio.paused) {
+      manuallyPausedRef.current = true;
       stopMusic();
       return;
     }
 
+    manuallyPausedRef.current = false;
     void startMusic();
   };
 
   return (
     <>
-      <audio ref={audioRef} loop preload="none" />
+      <audio ref={audioRef} src={MUSIC_SRC} loop preload="none" />
       <button
         type="button"
         className="music-toggle"
