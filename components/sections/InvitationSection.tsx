@@ -14,9 +14,6 @@ export function InvitationSection() {
         duration={1.7}
         y={0}
       />
-      <ScrollReveal as="p" className="invitation-lead" delay={0.1}>
-        Мы будем рады разделить с вами радость нашего важного дня!
-      </ScrollReveal>
       <RevealImage
         className="invitation-shell"
         src="/images/seashell.png"

@@ -266,13 +266,6 @@ button {
   user-select: none;
 }
 
-.invitation-section p.invitation-lead {
-  max-width: 240px;
-  margin-bottom: 50px;
-  font-size: 16px;
-  line-height: 1.25;
-}
-
 .invitation-shell {
   position: relative;
   z-index: 1;
