@@ -714,10 +714,11 @@ button {
 }
 
 .timeline-shell {
-  --timeline-axis: 61px;
+  --timeline-axis: 44px;
+  --timeline-content-left: 70px;
   position: relative;
   margin: 52px 0 0;
-  padding: 0 28px 0 70px;
+  padding: 0 28px 0 var(--timeline-content-left);
   text-align: left;
 }
 
@@ -725,7 +726,7 @@ button {
   position: absolute;
   top: -30px;
   bottom: 34px;
-  left: 44px;
+  left: var(--timeline-axis);
   width: 0.5px;
   background: linear-gradient(
     180deg,
@@ -733,6 +734,7 @@ button {
     #FFFFFF 100%
   );
   content: "";
+  transform: translateX(-50%);
 }
 
 .timeline {
@@ -773,7 +775,7 @@ button {
 .timeline-heart {
   position: absolute;
   top: 2px;
-  left: -26.4px;
+  left: calc(var(--timeline-axis) - var(--timeline-content-left));
   width: 8px;
   height: auto;
   pointer-events: none;
@@ -785,7 +787,6 @@ button {
   top: -40px;
   left: var(--timeline-axis);
   width: 13px;
-  left: 44.5px;
 }
 
 .timeline time {
@@ -1565,9 +1566,8 @@ button {
   }
 
   .timeline-shell {
-    --timeline-axis: 42px;
+    --timeline-content-left: 69px;
     padding-right: 18px;
-    padding-left: 69px;
   }
 
   .timeline .timeline-note {
