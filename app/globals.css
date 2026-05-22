@@ -838,7 +838,7 @@ button {
   left: 55%;
   z-index: 0;
   width: 440px;
-  height: 452px;
+  height: auto;
   pointer-events: none;
   transform: translateX(-50%);
   user-select: none;
@@ -1528,11 +1528,6 @@ button {
     min-height: 980px;
   }
 
-  .wishes-background {
-    top: 104px;
-    width: 420px;
-  }
-
   .wishes-people {
     width: 224px;
     height: 190px;
@@ -1544,8 +1539,8 @@ button {
   }
 
   .wishes-frame--right {
-    left: 124px;
-    width: 70px;
+    left: 137px;
+    width: 72px;
   }
 
   .wishes-body {
