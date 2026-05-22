@@ -1,0 +1,17 @@
+[Unit]
+Description=Wedding Oleg and Elena Next.js site
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=wedding
+Group=wedding
+WorkingDirectory=/var/www/wedding-oleg-elena
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npm run start -- -H 127.0.0.1 -p 3000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

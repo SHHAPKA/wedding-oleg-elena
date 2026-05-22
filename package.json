@@ -9,6 +9,9 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SHHAPKA/wedding-oleg-elena.git"
