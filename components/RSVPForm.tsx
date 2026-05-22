@@ -1,12 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch, type SubmitHandler } from "react-hook-form";
 import { submitRsvp } from "@/app/actions/submit-rsvp";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { rsvpSchema, type RSVPFormSchemaInput } from "@/lib/validations/rsvp";
 import type { RSVPFormValues, SubmitRsvpResult } from "@/types/rsvp";
+
+const SUCCESS_NOTICE_TIMEOUT = 4200;
 
 function normalizeChildrenInfo(rows: string[]) {
   return rows.map((row) => row.trim()).filter(Boolean).join(", ");
@@ -14,6 +16,7 @@ function normalizeChildrenInfo(rows: string[]) {
 
 export function RSVPForm() {
   const [result, setResult] = useState<SubmitRsvpResult | null>(null);
+  const [showSuccessNotice, setShowSuccessNotice] = useState(false);
   const [childrenRows, setChildrenRows] = useState<string[]>([]);
   const {
     register,
@@ -46,6 +49,16 @@ export function RSVPForm() {
       ? childrenCount
       : 0;
 
+  useEffect(() => {
+    if (!showSuccessNotice) {
+      return;
+    }
+
+    const timerId = window.setTimeout(() => setShowSuccessNotice(false), SUCCESS_NOTICE_TIMEOUT);
+
+    return () => window.clearTimeout(timerId);
+  }, [showSuccessNotice]);
+
   const updateChildRow = (index: number, value: string) => {
     setChildrenRows((currentRows) => {
       const nextRows = [...currentRows];
@@ -65,10 +78,12 @@ export function RSVPForm() {
       setValue("childrenInfo", "", { shouldDirty: true, shouldValidate: true });
     }
     setResult(null);
+    setShowSuccessNotice(false);
   };
 
   const onSubmit: SubmitHandler<RSVPFormValues> = async (values) => {
     setResult(null);
+    setShowSuccessNotice(false);
     const shouldSaveChildren = values.attendanceStatus !== "declined" && values.hasChildren;
     const response = await submitRsvp({
       ...values,
@@ -81,6 +96,7 @@ export function RSVPForm() {
     setResult(response);
 
     if (response.success) {
+      setShowSuccessNotice(true);
       setChildrenRows([]);
       reset({
         guestName: "",
@@ -238,13 +254,19 @@ export function RSVPForm() {
         {isSubmitting ? "Отправляем..." : "Отправить"}
       </button>
 
-      {result ? (
+      {showSuccessNotice ? (
+        <p className="rsvp-success-toast" role="status" aria-live="polite">
+          Подтверждение успешно отправлено
+        </p>
+      ) : null}
+
+      {result && !result.success ? (
         <ScrollReveal
           as="p"
-          className={result.success ? "form-message form-message--success" : "form-message"}
+          className="form-message"
           y={6}
         >
-          {result.success ? result.message : result.error}
+          {result.error}
         </ScrollReveal>
       ) : null}
     </ScrollReveal>
