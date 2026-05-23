@@ -69,7 +69,6 @@ button {
   border: 1px solid rgba(0, 55, 107, 0.24);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 12px 34px rgba(21, 63, 104, 0.14);
   color: var(--ink);
   backdrop-filter: blur(8px);
   transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
@@ -117,8 +116,8 @@ button {
 }
 
 .hero-section {
-  min-height: 270px;
-  padding: 40px 0 35px;
+  min-height: 320px;
+  padding: 40px 0 32px;
 }
 
 .hero-background {
@@ -206,6 +205,50 @@ button {
   width: 0.5px;
   height: 20px;
   background: black;
+}
+
+.countdown {
+  display: grid;
+  gap: 5px;
+  width: 220px;
+  max-width: calc(100vw - 64px);
+  margin-top: 20px;
+  color: var(--ink);
+}
+
+.countdown__title,
+.countdown__started {
+  margin: 0;
+  color: var(--ink);
+  font-size: 10px;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  align-items: stretch;
+}
+
+.countdown__item {
+  display: grid;
+  align-content: center;
+  gap: 1px;
+  min-width: 0;
+  min-height: 34px;
+}
+
+.countdown__item strong {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.countdown__item span {
+  font-size: 8px;
+  line-height: 1.2;
 }
 
 .watercolor {
@@ -650,6 +693,81 @@ button {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.35;
+}
+
+.location-section {
+  padding: 42px 0 62px;
+  overflow: visible;
+}
+
+.location-section .section-title,
+.location-section>p,
+.location-venue,
+.location-map {
+  position: relative;
+  z-index: 1;
+}
+
+.location-venue {
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+.location-venue p,
+.location-venue span {
+  max-width: 100%;
+}
+
+.location-venue p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 19px;
+  font-style: italic;
+}
+
+.location-venue span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.location-map {
+  width: 100%;
+  margin: 22px auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(104, 143, 179, 0.42);
+  border-radius: 8px;
+  background: rgba(217, 237, 247, 0.34);
+}
+
+.location-map iframe {
+  display: block;
+  width: 100%;
+  height: 280px;
+  border: 0;
+}
+
+.location-link-wrap {
+  max-width: 100% !important;
+  margin-top: 12px !important;
+  text-align: center;
+}
+
+.location-link-wrap a {
+  color: var(--ink);
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.25;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 55, 107, 0.28);
+  transition: border-color 160ms ease, color 160ms ease;
+}
+
+.location-link-wrap a:hover {
+  border-color: var(--ink);
+  color: #0f3457;
 }
 
 .watercolor--grass {

@@ -1,3 +1,4 @@
+import { CountdownTimer } from "@/components/CountdownTimer";
 import { RevealImage, ScrollReveal } from "@/components/ScrollReveal";
 
 export function HeroSection() {
@@ -64,6 +65,9 @@ export function HeroSection() {
           <ScrollReveal as="span" delay={0.72} y={8}>
             26
           </ScrollReveal>
+        </ScrollReveal>
+        <ScrollReveal delay={0.78} y={10}>
+          <CountdownTimer />
         </ScrollReveal>
       </div>
     </ScrollReveal>

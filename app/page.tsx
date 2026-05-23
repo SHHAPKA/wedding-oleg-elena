@@ -1,6 +1,7 @@
 import { CouplePhotoSection } from "@/components/sections/CouplePhotoSection";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { InvitationSection } from "@/components/sections/InvitationSection";
+import { LocationSection } from "@/components/sections/LocationSection";
 import { MusicPlayer } from "@/components/MusicPlayer";
 import { RSVPSection } from "@/components/sections/RSVPSection";
 import { TimelineSection } from "@/components/sections/TimelineSection";
@@ -16,6 +17,7 @@ export default function Home() {
       <WishesSection />
       <TimelineSection />
       <RSVPSection />
+      <LocationSection />
     </main>
   );
 }
