@@ -9,7 +9,7 @@ export function LocationSection() {
       <ScrollReveal as="h2" className="section-title" delay={0.08}>
         Локация
       </ScrollReveal>
-      <ScrollReveal as="p" className="align-left" delay={0.14}>
+      <ScrollReveal as="p" delay={0.14}>
         Ждем вас на берегу, где морской воздух и шум волн создадут настроение для теплого
         семейного вечера.
       </ScrollReveal>
