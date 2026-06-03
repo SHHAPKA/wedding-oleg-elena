@@ -30,18 +30,31 @@ function formatUnit(value: number) {
   return String(value).padStart(2, "0");
 }
 
+function formatCountdownValue(value: number | null, shouldPad = false) {
+  if (value === null) {
+    return "--";
+  }
+
+  return shouldPad ? formatUnit(value) : String(value);
+}
+
 export function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => getTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
-    const timerId = window.setInterval(() => {
+    function tick() {
       setTimeLeft(getTimeLeft());
-    }, SECOND);
+    }
+
+    tick();
+
+    const timerId = window.setInterval(tick, SECOND);
 
     return () => window.clearInterval(timerId);
   }, []);
 
   const hasStarted =
+    timeLeft !== null &&
     timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
 
   return (
@@ -53,19 +66,19 @@ export function CountdownTimer() {
           <p className="countdown__title">До начала торжества осталось</p>
           <div className="countdown__grid" role="timer" aria-live="polite">
             <span className="countdown__item">
-              <strong suppressHydrationWarning>{timeLeft.days}</strong>
+              <strong>{formatCountdownValue(timeLeft?.days ?? null)}</strong>
               <span>дней</span>
             </span>
             <span className="countdown__item">
-              <strong suppressHydrationWarning>{formatUnit(timeLeft.hours)}</strong>
+              <strong>{formatCountdownValue(timeLeft?.hours ?? null, true)}</strong>
               <span>часов</span>
             </span>
             <span className="countdown__item">
-              <strong suppressHydrationWarning>{formatUnit(timeLeft.minutes)}</strong>
+              <strong>{formatCountdownValue(timeLeft?.minutes ?? null, true)}</strong>
               <span>минут</span>
             </span>
             <span className="countdown__item">
-              <strong suppressHydrationWarning>{formatUnit(timeLeft.seconds)}</strong>
+              <strong>{formatCountdownValue(timeLeft?.seconds ?? null, true)}</strong>
               <span>секунд</span>
             </span>
           </div>
