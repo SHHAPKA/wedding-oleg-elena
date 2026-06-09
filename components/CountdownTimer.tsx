@@ -2,27 +2,93 @@
 
 import { useEffect, useState } from "react";
 
-const EVENT_START = new Date("2026-08-23T15:00:00+03:00").getTime();
 const SECOND = 1000;
 const MINUTE = 60 * SECOND;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
+const TAGANROG_UTC_OFFSET = 3 * HOUR;
+const WEDDING_YEAR = 2026;
+const WEDDING_MONTH_INDEX = 7;
+const WEDDING_DAY = 23;
+const WEDDING_HOUR = 15;
 
-type TimeLeft = {
+type CountdownPending = {
+  hasStarted: false;
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
 };
 
-function getTimeLeft(): TimeLeft {
-  const distance = Math.max(EVENT_START - Date.now(), 0);
+type CountdownStarted = {
+  hasStarted: true;
+};
 
+export type CountdownState = CountdownPending | CountdownStarted;
+
+function taganrogLocalTimeToUtc(
+  year: number,
+  monthIndex: number,
+  day: number,
+  hours = 0,
+  minutes = 0,
+  seconds = 0,
+) {
+  return Date.UTC(year, monthIndex, day, hours, minutes, seconds) - TAGANROG_UTC_OFFSET;
+}
+
+function getTaganrogDayStart(nowMs: number) {
+  const taganrogDate = new Date(nowMs + TAGANROG_UTC_OFFSET);
+
+  return taganrogLocalTimeToUtc(
+    taganrogDate.getUTCFullYear(),
+    taganrogDate.getUTCMonth(),
+    taganrogDate.getUTCDate(),
+  );
+}
+
+function getClockParts(distance: number) {
   return {
-    days: Math.floor(distance / DAY),
     hours: Math.floor((distance % DAY) / HOUR),
     minutes: Math.floor((distance % HOUR) / MINUTE),
     seconds: Math.floor((distance % MINUTE) / SECOND),
+  };
+}
+
+export function getCountdownState(nowMs = Date.now()): CountdownState {
+  const weddingDayStart = taganrogLocalTimeToUtc(
+    WEDDING_YEAR,
+    WEDDING_MONTH_INDEX,
+    WEDDING_DAY,
+  );
+  const weddingStart = taganrogLocalTimeToUtc(
+    WEDDING_YEAR,
+    WEDDING_MONTH_INDEX,
+    WEDDING_DAY,
+    WEDDING_HOUR,
+  );
+
+  if (nowMs >= weddingStart) {
+    return { hasStarted: true };
+  }
+
+  const todayStart = getTaganrogDayStart(nowMs);
+
+  if (todayStart < weddingDayStart) {
+    const nextMidnight = todayStart + DAY;
+    const distanceToMidnight = Math.min(Math.max(nextMidnight - nowMs, 0), DAY - SECOND);
+
+    return {
+      hasStarted: false,
+      days: Math.round((weddingDayStart - todayStart) / DAY),
+      ...getClockParts(distanceToMidnight),
+    };
+  }
+
+  return {
+    hasStarted: false,
+    days: 0,
+    ...getClockParts(Math.max(weddingStart - nowMs, 0)),
   };
 }
 
@@ -39,11 +105,11 @@ function formatCountdownValue(value: number | null, shouldPad = false) {
 }
 
 export function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+  const [countdown, setCountdown] = useState<CountdownState | null>(null);
 
   useEffect(() => {
     function tick() {
-      setTimeLeft(getTimeLeft());
+      setCountdown(getCountdownState());
     }
 
     tick();
@@ -53,32 +119,28 @@ export function CountdownTimer() {
     return () => window.clearInterval(timerId);
   }, []);
 
-  const hasStarted =
-    timeLeft !== null &&
-    timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
-
   return (
     <div className="countdown" aria-label="Обратный отсчёт до начала мероприятия">
-      {hasStarted ? (
+      {countdown?.hasStarted ? (
         <p className="countdown__started">Мы уже ждём вас!</p>
       ) : (
         <>
           <p className="countdown__title">До начала торжества осталось</p>
           <div className="countdown__grid" role="timer" aria-live="polite">
             <span className="countdown__item">
-              <strong>{formatCountdownValue(timeLeft?.days ?? null)}</strong>
+              <strong>{formatCountdownValue(countdown?.days ?? null)}</strong>
               <span>дней</span>
             </span>
             <span className="countdown__item">
-              <strong>{formatCountdownValue(timeLeft?.hours ?? null, true)}</strong>
+              <strong>{formatCountdownValue(countdown?.hours ?? null, true)}</strong>
               <span>часов</span>
             </span>
             <span className="countdown__item">
-              <strong>{formatCountdownValue(timeLeft?.minutes ?? null, true)}</strong>
+              <strong>{formatCountdownValue(countdown?.minutes ?? null, true)}</strong>
               <span>минут</span>
             </span>
             <span className="countdown__item">
-              <strong>{formatCountdownValue(timeLeft?.seconds ?? null, true)}</strong>
+              <strong>{formatCountdownValue(countdown?.seconds ?? null, true)}</strong>
               <span>секунд</span>
             </span>
           </div>
