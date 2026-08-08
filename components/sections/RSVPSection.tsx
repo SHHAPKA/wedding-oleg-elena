@@ -26,14 +26,8 @@ export function RSVPSection() {
         delay={0.12}
         y={8}
       />
-      <ScrollReveal as="h2" className="section-title" delay={0.18}>
-        Подтверждение
-      </ScrollReveal>
       <ScrollReveal as="p" className="rsvp-lead" delay={0.24}>
-        Пожалуйста подтвердите свое присутствие до
-        <ScrollReveal as="time" dateTime="2026-07-23" delay={0.3} y={6}>
-          23.07.2026
-        </ScrollReveal>
+        Пожалуйста подтвердите свое присутствие
       </ScrollReveal>
       <ScrollReveal className="rsvp-divider" aria-hidden="true" delay={0.34} y={8}>
         <span />
